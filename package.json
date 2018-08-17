@@ -1,0 +1,53 @@
+{
+  "name": "recompose-with-middleware",
+  "version": "0.0.0",
+  "description": "Adding middleware support to withState / withReducer from recompose",
+  "main": "./dist/index.js",
+  "scripts": {
+    "clean": "rm -rf dist coverage index.js",
+    "lint:js": "eslint \"src/**/**?(.spec|).js\"",
+    "lint:format": "prettier --write \"{src,scripts}/**/**.js\"",
+    "test": "jest --coverage",
+    "test:watch": "jest --coverage --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yeojz/recompose-with-middleware.git"
+  },
+  "keywords": [
+    "recompose",
+    "hoc",
+    "middleware",
+    "withReducer",
+    "withState",
+    "react"
+  ],
+  "author": "Gerald Yeo <contact@fusedthought.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yeojz/recompose-with-middleware/issues"
+  },
+  "homepage": "https://github.com/yeojz/recompose-with-middleware",
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.2.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "jest": "^23.4.2",
+    "prettier": "^1.13.7",
+    "react": "^16.4.1",
+    "recompose": "^0.27.1"
+  },
+  "jest": {
+    "coverageDirectory": "./coverage/",
+    "coveragePathIgnorePatterns": [],
+    "modulePaths": [],
+    "roots": [],
+    "resetMocks": true,
+    "setupFiles": [],
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testURL": "http://localhost"
+  }
+}
