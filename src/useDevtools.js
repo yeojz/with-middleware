@@ -1,7 +1,7 @@
+import { DEVTOOLS_INIT, SET_ACTION, BATCH_ACTION } from './constants';
+
 let instanceId = 0;
 const instances = {};
-
-const ACTION_INIT = '@@RWM/INIT';
 
 function getInstanceId(title) {
   if (title) {
@@ -28,22 +28,17 @@ function getInstance(instanceId) {
 
 function setState(next, value) {
   next({
-    __devtools__: n => n(value)
+    type: SET_ACTION,
+    payload: value
   });
 }
 
-function getReplayValue(state, actionIds, fn) {
-  const computedValue = actionIds.reduce((nextState, actionId) => {
-    const action = state.actionsById[actionId].action;
+function getReplayPayload(skipId, state) {
+  const currentStateIndex = `${state.currentStateIndex}`;
 
-    if (action.type === ACTION_INIT) {
-      return nextState;
-    }
-
-    return fn(nextState, action);
-  }, state.computedStates[0].state);
-
-  return computedValue;
+  return Object.keys(state.actionsById)
+    .filter(actionId => actionId !== skipId && actionId <= currentStateIndex)
+    .map(actionId => state.actionsById[actionId].action);
 }
 
 function replay(next, skipId, state) {
@@ -51,13 +46,12 @@ function replay(next, skipId, state) {
     return;
   }
 
-  const actionIds = Object.keys(state.actionsById).filter(x => {
-    const current = parseInt(x, 10);
-    return current !== skipId && current <= state.currentStateIndex;
-  });
+  const payload = getReplayPayload(skipId, state);
 
   next({
-    __devtools__: (n, fn) => n(getReplayValue(state, actionIds, fn))
+    payload,
+    state: state.computedStates[0].state,
+    type: BATCH_ACTION
   });
 }
 
@@ -75,13 +69,13 @@ const createListener = next => message => {
   }
 
   if (message.payload.type === 'TOGGLE_ACTION') {
-    replay(next, message.payload.id, JSON.parse(message.state));
+    replay(next, `${message.payload.id}`, JSON.parse(message.state));
   }
 };
 
 function subscribe(store, next, instance, middleware) {
   if (!middleware.initialized) {
-    instance.send(ACTION_INIT, store.getState());
+    instance.send(DEVTOOLS_INIT, store.getState());
 
     const listener = createListener(next);
     instance.subscribe(listener);

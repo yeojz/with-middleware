@@ -1,28 +1,26 @@
-function applyReducers(reducers) {
-  if (typeof reducers === 'function') {
-    return reducers;
-  }
+import { BATCH_ACTION, SET_ACTION } from './constants';
 
-  return (state, action) => {
-    return Object.keys(reducers).reduce((newState, name) => {
-      newState[name] = reducers[name](state[name], action);
-      return newState;
-    }, {});
-  };
+function batchAction(reducer, store, next, action) {
+  const state = action.payload.reduce(
+    (nextState, current) => reducer(nextState, current),
+    action.state || store.getState()
+  );
+
+  return next(state);
 }
 
-function useReducer(fn) {
-  const reducer = applyReducers(fn);
-
+function useReducer(reducer) {
   return store => next => action => {
-    if (action.__devtools__) {
-      action.__devtools__(next, reducer);
-      return;
+    if (action.type === BATCH_ACTION) {
+      return batchAction(reducer, store, next, action);
+    }
+
+    if (action.type === SET_ACTION) {
+      return next(action.payload);
     }
 
     const state = reducer(store.getState(), action);
-    next(state);
-    return action;
+    return next(state);
   };
 }
 
