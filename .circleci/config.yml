@@ -21,13 +21,12 @@ aliases:
     name: install dependencies
     command: |
       npm install
-      npm install --no-save typescript
 
   - &build_package
     name: build package
     command: |
       npm run clean
-      npm run build:modules
+      npm run build
 
   - &filter_common
     branches:
