@@ -1,8 +1,8 @@
 /*eslint-disable no-console*/
 const path = require('path');
-const pkg = require('../package.json');
+const pkg = require('./package.json');
 
-const ROOT_DIR = path.resolve(__dirname, '..');
+const ROOT_DIR = path.resolve(__dirname);
 
 const banner = `/**
  * ${pkg.name}

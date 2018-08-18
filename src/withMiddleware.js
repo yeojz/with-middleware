@@ -1,8 +1,8 @@
 import { createFactory } from 'react';
-import applyMiddleware from './applyMiddleware';
+import applyMiddleware from './helpers/applyMiddleware';
 
 function createComponent(stateName, dispatchName, createDispatch, factory) {
-  return props => {
+  function ComponentWithMiddleware(props) {
     const dispatch = createDispatch(props[stateName], props[dispatchName]);
 
     return factory(
@@ -10,7 +10,9 @@ function createComponent(stateName, dispatchName, createDispatch, factory) {
         [dispatchName]: dispatch
       })
     );
-  };
+  }
+
+  return ComponentWithMiddleware;
 }
 
 function withMiddleware(stateName, dispatchName, middlewares) {
