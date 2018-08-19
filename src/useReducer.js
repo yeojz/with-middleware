@@ -10,6 +10,12 @@ function batchAction(reducer, store, next, action) {
 }
 
 function useReducer(reducer) {
+  if (typeof reducer !== 'function') {
+    throw new Error(
+      `Expecting argument 1 of "useReducer" to be a function. ${typeof reducer} given.`
+    );
+  }
+
   return store => next => action => {
     if (action.type === BATCH_ACTION) {
       return batchAction(reducer, store, next, action);

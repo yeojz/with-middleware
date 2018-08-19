@@ -1,17 +1,19 @@
+/* eslint-disable react/prop-types */
+
 import React from 'react';
 
 function Basic(props) {
   return (
     <div>
-      <div className="value">{props.counter}</div>
+      <div data-testid="value">{props.counter}</div>
       <button
-        className="increment"
+        data-testid="increment"
         onClick={() => props.setCounter(n => n + 1)}
       >
         Increment
       </button>
       <button
-        className="decretment"
+        data-testid="decrement"
         onClick={() => props.setCounter(n => n - 1)}
       >
         Decrement
