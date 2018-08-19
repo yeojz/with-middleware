@@ -1,4 +1,4 @@
-import compose from 'recompose/compose';
+import { compose } from 'recompose';
 import createStoreAPI from './createStoreAPI';
 
 function enhanceStore(api, middlewares, callback, originalDispatch) {
