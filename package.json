@@ -1,7 +1,7 @@
 {
-  "name": "recompose-with-middleware",
+  "name": "with-middleware",
   "version": "0.0.0",
-  "description": "Adding middleware support to withState / withReducer from recompose",
+  "description": "Add middleware support to any function prop or withState from recompose",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
   "scripts": {
@@ -14,22 +14,27 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yeojz/recompose-with-middleware.git"
+    "url": "https://github.com/yeojz/with-middleware.git"
   },
   "keywords": [
+    "react",
     "recompose",
     "hoc",
     "middleware",
-    "withReducer",
     "withState",
-    "react"
+    "dispatch",
+    "store",
+    "state",
+    "withReducer",
+    "withMiddleware",
+    "setState"
   ],
   "author": "Gerald Yeo <contact@fusedthought.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yeojz/recompose-with-middleware/issues"
+    "url": "https://github.com/yeojz/with-middleware/issues"
   },
-  "homepage": "https://github.com/yeojz/recompose-with-middleware",
+  "homepage": "https://github.com/yeojz/with-middleware",
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
@@ -41,7 +46,6 @@
     "prettier": "^1.13.7",
     "react": "^16.4.1",
     "react-dom": "^16.4.2",
-    "react-test-renderer": "^16.4.2",
     "react-testing-library": "^5.0.0",
     "recompose": "^0.27.1",
     "rollup": "^0.64.1",
@@ -51,13 +55,12 @@
     "coverageDirectory": "./coverage/",
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "<rootDir>/tests/helpers"
+      "<rootDir>/test-helpers"
     ],
     "resetMocks": true,
-    "setupFiles": [],
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "<rootDir>/tests/helpers"
+      "<rootDir>/test-helpers"
     ],
     "testURL": "http://localhost"
   }

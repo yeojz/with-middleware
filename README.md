@@ -1,6 +1,6 @@
-# recompose-with-middleware
+# with-middleware
 
-> Adding middleware support to withState from recompose
+> Add middleware support to any function prop or withState from recompose
 
 [![npm][npm-badge]][npm-link]
 
@@ -18,22 +18,21 @@
 
 ## About
 
-`recompose-with-middleware` provides the ability to add middlewares to components
-that are decorated with `withState` or `withReducer` higher-order components.
+`with-middleware` provides the ability to add middleware support to prop functions.
+As such this library also goes well with the usage of the `withState` higher-order
+component from `recompose`
 
-This allows you to quickly re-use some simple middlewares that were written for redux
-without the need to use redux if your use case might just require a state within a
-parent component.
+The API follows closely with that of `redux`, giving you the ability to quickly re-use
+some of the middlewares that were written for redux in a single component.
 
-If you want to use `withReducer` from recompose, there are some caveats.
-Please check the usage with `withReducer` section.
+If you want to use `withReducer` from `recompose`, there are some caveats listed in the examples section.
 
 ## Installation
 
 Install the library via:
 
 ```bash
-npm install recompose-with-middleware --save
+npm install with-middleware --save
 ```
 
 ## Function Reference

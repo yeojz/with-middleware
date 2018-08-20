@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`basic should render without errors 1`] = `
+exports[`useDevtools - mounted should render without errors (with title) 1`] = `
 <div>
   <div
     data-testid="value"
@@ -20,7 +20,7 @@ exports[`basic should render without errors 1`] = `
 </div>
 `;
 
-exports[`using reducers should render without errors 1`] = `
+exports[`useDevtools - mounted should render without errors (without title) 1`] = `
 <div>
   <div
     data-testid="value"

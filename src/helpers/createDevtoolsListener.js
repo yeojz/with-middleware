@@ -1,6 +1,8 @@
-import { SET_ACTION, BATCH_ACTION } from '../constants';
-
-const DEVTOOLS_EXTENSION_SOURCE = '@devtools-extension';
+import {
+  SET_ACTION,
+  BATCH_ACTION,
+  DEVTOOLS_EXTENSION_SOURCE
+} from '../constants';
 
 function getReplayPayload(skipId, state) {
   const currentStateIndex = `${state.currentStateIndex}`;
@@ -10,28 +12,27 @@ function getReplayPayload(skipId, state) {
     .map(actionId => state.actionsById[actionId].action);
 }
 
+function filterNonDevtool(message) {
+  return message.source !== DEVTOOLS_EXTENSION_SOURCE;
+}
+
+function filterNonDispatch(message) {
+  return message.type !== 'DISPATCH' || !message.payload;
+}
+
 function applyManualDispatch(message, next, store) {
-  if (
-    message.type === 'ACTION' &&
-    message.source === DEVTOOLS_EXTENSION_SOURCE
-  ) {
+  if (message.type === 'ACTION') {
     try {
       const action = JSON.parse(message.payload);
       store.dispatch(action);
     } catch (err) {
-      console.error(err); // eslint-disable-line
+      // do nothing
     }
 
     return true;
   }
 
   return false;
-}
-
-function filterNonDevtool(message) {
-  return (
-    message.type !== 'DISPATCH' || message.source !== DEVTOOLS_EXTENSION_SOURCE
-  );
 }
 
 function applyCommit(instance) {
@@ -82,8 +83,9 @@ function applyActionSkips(message, next) {
 
 const createDevtoolsListener = (store, next, instance) => message => {
   [
-    applyManualDispatch,
     filterNonDevtool,
+    applyManualDispatch,
+    filterNonDispatch,
     applyActionJumps,
     applyActionSkips,
     applyCommit(instance)

@@ -2,6 +2,7 @@ import createDevtoolsListener from './helpers/createDevtoolsListener';
 
 let instanceId = 0;
 const instances = {};
+const initialized = {};
 
 function getInstanceId(title) {
   if (title) {
@@ -26,13 +27,14 @@ function getInstance(instanceId) {
   }
 }
 
-function subscribe(store, next, instance, middleware) {
-  if (!middleware.initialized) {
+function subscribe(store, next, instance, instanceId) {
+  if (!initialized[instanceId]) {
     instance.init(store.getState());
+
     const listener = createDevtoolsListener(store, next, instance);
 
     instance.subscribe(listener);
-    middleware.initialized = true;
+    initialized[instanceId] = true;
   }
 }
 
@@ -41,7 +43,7 @@ function useDevtools(title) {
   const instance = getInstance(instanceId);
 
   return store => next => action => {
-    subscribe(store, next, instance, useDevtools);
+    subscribe(store, next, instance, instanceId);
 
     const state = next(action);
     if (instance) {

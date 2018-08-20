@@ -1,14 +1,18 @@
+import { cleanup, fireEvent } from 'react-testing-library';
+import createRenderer from '../test-helpers/createRenderer';
+import Dispatch from '../test-helpers/Dispatch';
+import reducer from '../test-helpers/reducer';
 import { BATCH_ACTION, SET_ACTION } from './constants';
 import useReducer from './useReducer';
 
 const noop = () => null;
 
-test('should throw error when invalid reducer given', () => {
-  expect(() => useReducer()).toThrowError();
-});
+describe('useReducer', () => {
+  test('should throw error when invalid reducer given', () => {
+    expect(() => useReducer()).toThrowError();
+  });
 
-describe('SET_ACTION', () => {
-  test('should call next with correct value', () => {
+  test('(SET_ACTION) should skip reducer step', () => {
     const next = jest.fn();
 
     const middleware = useReducer(noop);
@@ -20,10 +24,8 @@ describe('SET_ACTION', () => {
 
     expect(next).toBeCalledWith('test');
   });
-});
 
-describe('BATCH_ACTION', () => {
-  test('should execute list of actions', () => {
+  test('(BATCH_ACTION) should reduce array of actions to a single state', () => {
     const next = jest.fn();
     const reducer = jest.fn();
 
@@ -57,5 +59,32 @@ describe('BATCH_ACTION', () => {
 
     expect(store.getState).toHaveBeenCalledTimes(1);
     expect(reducer).toHaveBeenNthCalledWith(1, 'test', {});
+  });
+});
+
+describe('useReducer - mounted', () => {
+  afterEach(cleanup);
+
+  const renderer = createRenderer(Dispatch);
+
+  function createWithReducer() {
+    return renderer('state', 'dispatch', reducer(), [useReducer(reducer)]);
+  }
+
+  test('should render without errors', () => {
+    const { container } = createWithReducer();
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  test('should update state properly', () => {
+    const { getByTestId } = createWithReducer();
+
+    expect(getByTestId('value').textContent).toBe('0');
+
+    fireEvent.click(getByTestId('increment'));
+    expect(getByTestId('value').textContent).toBe('1');
+
+    fireEvent.click(getByTestId('decrement'));
+    expect(getByTestId('value').textContent).toBe('0');
   });
 });

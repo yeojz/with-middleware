@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useReducer - mounted should render without errors 1`] = `
+<div>
+  <div
+    data-testid="value"
+  >
+    0
+  </div>
+  <button
+    data-testid="increment"
+  >
+    Increment
+  </button>
+  <button
+    data-testid="decrement"
+  >
+    Decrement
+  </button>
+</div>
+`;

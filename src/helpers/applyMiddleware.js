@@ -1,5 +1,8 @@
-import { compose } from 'recompose';
 import createStoreAPI from './createStoreAPI';
+
+function compose(...funcs) {
+  return funcs.reduce((a, b) => (...args) => a(b(...args)), arg => arg);
+}
 
 function enhanceStore(api, middlewares, callback, originalDispatch) {
   const chain = middlewares.map(middleware => middleware(api.store));
