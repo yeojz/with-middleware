@@ -1,6 +1,6 @@
 # Using withState
 
-The [basic usage](./basic-usage.md) can be simplified with the help of `withState` from `recompose`
+The [basic usage](../basic-usage/README.md) can be simplified with the help of `withState` from `recompose`
 
 ```diff
 import React from 'react';

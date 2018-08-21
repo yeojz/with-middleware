@@ -20,15 +20,14 @@
 ## About
 
 `with-middleware` provides the ability to add middleware support
-to prop functions. As such this library also goes well with the
-usage of the `withState` higher-order component from `recompose`.
+to function props.
 
 The API follows closely with that of `redux`, giving you the ability
-to quickly re-use some of the middlewares that were written for redux
+to quickly re-use some of the middlewares that were written for redux,
 in a single component.
 
-If you want to use `withReducer` from `recompose`, there are some caveats
-listed in the examples section.
+This library goes well with the usage of the `withState` higher-order component
+from `recompose`. Changes will be required if you're using `withReducer` from `recompose`.
 
 ## Installation
 
