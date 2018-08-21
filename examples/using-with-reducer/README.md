@@ -2,14 +2,14 @@
 
 As there are slight implementation additions, instead of
 using `recompose/withReducer` we can achieve the same with
-just `recompose/withState` and the `useReducer` middleware
+just `recompose/withState` + `useReducer` middleware
 from this library.
 
 ```diff
-- import { withReducer } from 'recompose';
-+ import { withState } from 'recompose';
-- import { withMiddleware } from 'recompose-with-middleware';
-+ import { withMiddleware, useReducer, useDevtools } from 'recompose-with-middleware';
+import React from 'react';
+- import { compose, withReducer } from 'recompose';
++ import { compose, withState } from 'recompose';
++ import { withMiddleware, useReducer, useDevtools } from 'with-middleware';
 
 const initialState = { count: 0 }
 
@@ -25,7 +25,7 @@ const reducer = (state = initialState, action = {}) => {
 
 const enhance = compose(
 - withReducer('store', 'dispatch', reducer),
-+ withState('store', 'dispatch')
++ withState('store', 'dispatch'),
   withMiddleware('store', 'dispatch', [
      middlewareFunction1,
      middlewareFunction2,

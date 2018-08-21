@@ -1,10 +1,6 @@
-# Basic Usage
-
-An example usage on a generic function prop.
-
-```js
+/* eslint-disable no-console */
 import React from 'react';
-import { withMiddleware } from 'with-middleware';
+import { withMiddleware } from './with-middleware';
 
 // logger from:
 // https://github.com/reduxjs/redux/blob/bebd067fed678de1926a76284ebaf4373c6b2769/docs/advanced/Middleware.md#seven-examples
@@ -44,4 +40,3 @@ class Counter extends React.Component {
 }
 
 export default Counter;
-```

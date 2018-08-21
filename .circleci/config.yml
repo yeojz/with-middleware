@@ -107,6 +107,9 @@ jobs:
       - checkout
       - restore-cache: *restore_test_cache
       - run: *install_npm
+      - run:
+          name: install coverage tool
+          command: npm install --no-save codecov
       - save_cache: *save_test_cache
       - run: *build_package
       - run:
@@ -116,6 +119,10 @@ jobs:
           name: lint
           command: |
             npm run lint:js
+      - run:
+          name: send coverage report
+          command: npx codecov
+          when: on_success
 
   node_v6:
     docker:

@@ -28,7 +28,7 @@ function getInstance(instanceId) {
 }
 
 function subscribe(store, next, instance, instanceId) {
-  if (!initialized[instanceId]) {
+  if (instance && !initialized[instanceId]) {
     instance.init(store.getState());
 
     const listener = createDevtoolsListener(store, next, instance);
