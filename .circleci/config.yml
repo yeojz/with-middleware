@@ -53,7 +53,7 @@ aliases:
       ignore: /.*/
 
   - &node_tests
-    working_directory: ~/yeojz/recompose-with-middleware
+    working_directory: ~/yeojz/with-middleware
     steps:
       - checkout
       - restore-cache: *restore_test_cache
@@ -65,7 +65,7 @@ aliases:
           command: npm run test
 
   - &defaults
-    working_directory: ~/yeojz/recompose-with-middleware
+    working_directory: ~/yeojz/with-middleware
     docker:
       - image: circleci/node:8
 
@@ -87,7 +87,7 @@ aliases:
             npm run clean
             npm run build
       - run:
-          working_directory: ~/yeojz/recompose-with-middleware
+          working_directory: ~/yeojz/with-middleware
           name: publish to npm
           command: |
             echo "npm tag = $RUNTIME_NPM_TAG"

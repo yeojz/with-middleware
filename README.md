@@ -3,6 +3,7 @@
 > Add middleware support to any function prop or withState from recompose
 
 [![npm][npm-badge]][npm-link]
+[![Build Status][circle-badge]][circle-link]
 
 ---
 
@@ -60,3 +61,5 @@ withMiddleware(
 
 [npm-badge]: https://img.shields.io/npm/v/with-middleware.svg?style=flat-square
 [npm-link]: https://www.npmjs.com/package/with-middleware
+[circle-badge]: https://img.shields.io/circleci/project/github/yeojz/with-middleware/master.svg?style=flat-square
+[circle-link]: https://circleci.com/gh/yeojz/with-middleware
