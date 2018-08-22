@@ -12,11 +12,12 @@
 
 - [About](#about)
 - [Installation](#installation)
+- [Examples](#examples)
+- [Sample Usage](#sample-usage)
 - [Function Reference](#function-reference)
   - [withMiddleware](#withmiddleware)
   - [useReducer](#usereducer)
   - [useDevtools](#usedevtools)
-- [Examples](#examples)
 - [License](#license)
 
 <!-- /TOC -->
@@ -39,6 +40,37 @@ Install the library via:
 
 ```bash
 npm install with-middleware --save
+```
+
+## Examples
+
+- [Basic Usage](./examples/basic-usage/README.md)
+- [Using withState](./examples/using-with-state/README.md)
+- [Using withReducer](./examples/using-with-reducer/README.md)
+- [Redux Emulator](./examples/redux-emulator/README.md)
+
+## Sample Usage
+
+```js
+import React from 'react';
+import { compose, withState } from 'recompose';
+import { withMiddleware } from 'with-middleware';
+import logger from 'some-logger-middleware';
+
+const enhance = compose(
+  withState('counter', 'setCounter', 0),
+  withMiddleware('counter', 'setCounter', [logger])
+);
+
+const Counter = enhance(({ counter, setCounter }) => (
+  <div>
+    Count: {counter}
+    <button onClick={() => setCounter(n => n + 1)}>Increment</button>
+    <button onClick={() => setCounter(n => n - 1)}>Decrement</button>
+  </div>
+));
+
+export default Counter;
 ```
 
 ## Function Reference
@@ -74,13 +106,6 @@ useDevtools(
   title: string // title shown in redux-devtool-extension console
 ): Middleware
 ```
-
-## Examples
-
-- [Basic Usage](./examples/basic-usage/README.md)
-- [Using withState](./examples/using-with-state/README.md)
-- [Using withReducer](./examples/using-with-reducer/README.md)
-- [Redux Emulator](./examples/redux-emulator/README.md)
 
 ## License
 
