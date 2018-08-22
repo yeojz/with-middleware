@@ -4,6 +4,7 @@
 
 [![npm][npm-badge]][npm-link]
 [![Build Status][circle-badge]][circle-link]
+[![Coverage Status][codecov-badge]][codecov-link]
 
 ---
 
@@ -89,3 +90,5 @@ useDevtools(
 [npm-link]: https://www.npmjs.com/package/with-middleware
 [circle-badge]: https://img.shields.io/circleci/project/github/yeojz/with-middleware/master.svg?style=flat-square
 [circle-link]: https://circleci.com/gh/yeojz/with-middleware
+[codecov-badge]: https://img.shields.io/codecov/c/github/yeojz/with-middleware/master.svg?style=flat-square
+[codecov-link]: https://codecov.io/gh/yeojz/with-middleware
