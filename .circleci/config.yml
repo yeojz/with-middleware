@@ -74,13 +74,7 @@ aliases:
       - checkout
       - restore-cache: *restore_release_cache
       - run: *install_npm
-      - run:
-          name: install conventional-github-releaser
-          command: npm install --no-save conventional-github-releaser
       - save_cache: *save_release_cache
-      - run:
-          name: update github release description
-          command: npx conventional-github-releaser -p angular
       - run:
           name: build for npm
           command: |
