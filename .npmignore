@@ -22,3 +22,6 @@ node_modules-*
 src
 tests
 webpack.config.js
+
+test-helpers
+examples
