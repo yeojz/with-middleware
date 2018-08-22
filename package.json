@@ -1,6 +1,6 @@
 {
   "name": "with-middleware",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Add middleware support to any function prop or withState from recompose",
   "main": "./dist/index.js",
   "module": "./dist/index.esm.js",
