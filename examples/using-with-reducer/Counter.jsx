@@ -2,31 +2,11 @@
 import React from 'react';
 import { compose, withState } from 'recompose';
 import { withMiddleware, useReducer, useDevtools } from 'with-middleware';
-
-const logger = store => next => action => {
-  console.group('logging middleware');
-  console.info('dispatching', action);
-  let result = next(action);
-  console.log('next state', store.getState());
-  console.groupEnd();
-  return result;
-};
-
-const initialState = { count: 0 };
-
-const reducer = (state = initialState, action = {}) => {
-  if (action.type === 'INCREMENT') {
-    return { count: state.count + 1 };
-  }
-  if (action.type === 'DECREMENT') {
-    return { count: state.count - 1 };
-  }
-  return state;
-};
+import { logger, initialState, reducer } from '../shared';
 
 const enhance = compose(
-  withState('store', 'dispatch'),
-  withMiddleware('store', 'dispatch', [
+  withState('state', 'dispatch', initialState),
+  withMiddleware('state', 'dispatch', [
     logger,
     useDevtools('desired name'),
     useReducer(reducer)

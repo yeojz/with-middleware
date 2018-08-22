@@ -10,18 +10,7 @@ import React from 'react';
 - import { compose, withReducer } from 'recompose';
 + import { compose, withState } from 'recompose';
 + import { withMiddleware, useReducer, useDevtools } from 'with-middleware';
-
-const initialState = { count: 0 }
-
-const reducer = (state = initialState, action = {}) => {
-  if (action.type === 'INCREMENT') {
-    return { count: state.count + 1 };
-  }
-  if (action.type === 'DECREMENT') {
-    return { count: state.count - 1 };
-  }
-  return state;
-};
+import { logger, initialState, reducer } from '../shared';
 
 const enhance = compose(
 - withReducer('store', 'dispatch', reducer),

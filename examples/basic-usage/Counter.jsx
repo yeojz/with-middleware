@@ -1,17 +1,7 @@
 /* eslint-disable no-console */
 import React from 'react';
-import { withMiddleware } from './with-middleware';
-
-// logger from:
-// https://github.com/reduxjs/redux/blob/bebd067fed678de1926a76284ebaf4373c6b2769/docs/advanced/Middleware.md#seven-examples
-const logger = store => next => action => {
-  console.group('logging middleware');
-  console.info('dispatching', action);
-  let result = next(action);
-  console.log('next state', store.getState());
-  console.groupEnd();
-  return result;
-};
+import { withMiddleware } from 'with-middleware';
+import { logger } from '../shared';
 
 const enhance = withMiddleware('counter', 'setCounter', [logger]);
 
@@ -34,7 +24,10 @@ class Counter extends React.Component {
 
   render() {
     return (
-      <Counter counter={this.state.counter} setCounter={this.setCounter} />
+      <CounterDisplay
+        counter={this.state.counter}
+        setCounter={this.setCounter}
+      />
     );
   }
 }

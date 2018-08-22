@@ -6,15 +6,7 @@ The [basic usage](../basic-usage/README.md) can be simplified with the help of `
 import React from 'react';
 + import { compose, withState } from 'recompose';
 import { withMiddleware } from 'with-middleware';
-
-const logger = store => next => action => {
-  console.group('logging middleware');
-  console.info('dispatching', action);
-  let result = next(action);
-  console.log('next state', store.getState());
-  console.groupEnd();
-  return result;
-};
+import { logger } from '../shared';
 
 - const enhance = withMiddleware('counter', 'setCounter', [logger]);
 + const enhance = compose(

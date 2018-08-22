@@ -12,6 +12,9 @@
 - [About](#about)
 - [Installation](#installation)
 - [Function Reference](#function-reference)
+  - [withMiddleware](#withmiddleware)
+  - [useReducer](#usereducer)
+  - [useDevtools](#usedevtools)
 - [Examples](#examples)
 - [License](#license)
 
@@ -19,12 +22,12 @@
 
 ## About
 
-`with-middleware` provides the ability to add middleware support
-to function props.
+`with-middleware` provides the ability to add middleware support (and reducers)
+to function props of a component.
 
-The API follows closely with that of `redux`, giving you the ability
-to quickly re-use some of the middlewares that were written for redux,
-in a single component.
+The middleware API follows closely to that of `redux`, giving you the ability
+to quickly re-use some of the middlewares that were written for redux within a
+single component.
 
 This library goes well with the usage of the `withState` higher-order component
 from `recompose`. Changes will be required if you're using `withReducer` from `recompose`.
@@ -39,7 +42,11 @@ npm install with-middleware --save
 
 ## Function Reference
 
+### withMiddleware
+
 ```js
+import { withMiddleware } from './with-middleware';
+
 withMiddleware(
   stateName: string,
   stateUpdaterName: string,
@@ -47,12 +54,32 @@ withMiddleware(
 ): HigherOrderComponent
 ```
 
+### useReducer
+
+```js
+import { useReducer } from './with-middleware';
+
+useReducer(
+  reducer: Function
+): Middleware
+```
+
+### useDevtools
+
+```js
+import { useDevtools } from './with-middleware';
+
+useDevtools(
+  title: string // title shown in redux-devtool-extension console
+): Middleware
+```
+
 ## Examples
 
 - [Basic Usage](./examples/basic-usage/README.md)
 - [Using withState](./examples/using-with-state/README.md)
 - [Using withReducer](./examples/using-with-reducer/README.md)
-- [Emulating Redux using Context](./examples/emulating-redux-using-context/README.md)
+- [Redux Emulator](./examples/redux-emulator/README.md)
 
 ## License
 
