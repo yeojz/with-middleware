@@ -78,7 +78,7 @@ export default Counter;
 ### withMiddleware
 
 ```js
-import { withMiddleware } from './with-middleware';
+import { withMiddleware } from 'with-middleware';
 
 withMiddleware(
   stateName: string,
@@ -90,7 +90,7 @@ withMiddleware(
 ### useReducer
 
 ```js
-import { useReducer } from './with-middleware';
+import { useReducer } from 'with-middleware';
 
 useReducer(
   reducer: Function
@@ -100,7 +100,7 @@ useReducer(
 ### useDevtools
 
 ```js
-import { useDevtools } from './with-middleware';
+import { useDevtools } from 'with-middleware';
 
 useDevtools(
   title: string // title shown in redux-devtool-extension console
