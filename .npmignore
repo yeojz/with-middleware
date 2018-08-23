@@ -25,3 +25,4 @@ webpack.config.js
 
 test-helpers
 examples
+.cache

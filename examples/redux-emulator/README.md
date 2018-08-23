@@ -9,3 +9,5 @@ a full redux-like store using React 16's [Context API](https://reactjs.org/docs/
 - `redux-emulator.js` - contains the redux style methods.
 - `App.jsx` - creating the store
 - `Counter.jsx` - A sample connected component
+
+To run example, please refer to [examples/README.md](../README.md)

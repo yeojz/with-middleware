@@ -41,3 +41,5 @@ import { logger } from '../shared';
 
 export default Counter;
 ```
+
+To run example, please refer to [examples/README.md](../README.md)
