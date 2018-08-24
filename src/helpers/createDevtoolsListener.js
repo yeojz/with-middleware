@@ -44,6 +44,7 @@ function applyCommit(instance) {
     return false;
   };
 }
+
 function applyActionJumps(message, next) {
   if (
     message.payload.type === 'JUMP_TO_ACTION' ||

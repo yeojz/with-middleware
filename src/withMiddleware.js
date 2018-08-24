@@ -1,20 +1,6 @@
 import { createFactory } from 'react';
 import applyMiddleware from './helpers/applyMiddleware';
 
-function createComponent(stateName, dispatchName, createDispatch, factory) {
-  function ComponentWithMiddleware(props) {
-    const dispatch = createDispatch(props[stateName], props[dispatchName]);
-
-    return factory(
-      Object.assign({}, props, {
-        [dispatchName]: dispatch
-      })
-    );
-  }
-
-  return ComponentWithMiddleware;
-}
-
 function withMiddleware(stateName, dispatchName, middlewares) {
   if (!Array.isArray(middlewares)) {
     throw new Error(
@@ -26,7 +12,18 @@ function withMiddleware(stateName, dispatchName, middlewares) {
 
   return BaseComponent => {
     const factory = createFactory(BaseComponent);
-    return createComponent(stateName, dispatchName, createDispatch, factory);
+
+    function WithMiddleware(props) {
+      const dispatch = createDispatch(props[stateName], props[dispatchName]);
+
+      return factory(
+        Object.assign({}, props, {
+          [dispatchName]: dispatch
+        })
+      );
+    }
+
+    return WithMiddleware;
   };
 }
 
