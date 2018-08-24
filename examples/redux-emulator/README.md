@@ -6,7 +6,7 @@ middlewares to a component function prop.
 However, with this `proof-of-concept`, it extends the implementation to
 a full redux-like store using React 16's [Context API](https://reactjs.org/docs/context.html)
 
-- `redux-emulator.js` - contains the redux style methods.
+- `redux-emulator.js` - methods which emulates redux's api contracts.
 - `App.jsx` - creating the store
 - `Counter.jsx` - A sample connected component
 

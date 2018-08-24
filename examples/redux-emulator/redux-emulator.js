@@ -1,6 +1,6 @@
 import React from 'react';
 import { compose, withState } from 'recompose';
-import { withMiddleware, useReducer } from 'with-middleware';
+import { withMiddleware, useDevtools, useReducer } from 'with-middleware';
 
 const initialStore = {
   getState: () => ({}),
@@ -12,15 +12,31 @@ const {
   Consumer: StoreConsumer
 } = React.createContext(initialStore);
 
+function getTitle() {
+  if (typeof window !== 'undefined') {
+    return window.document.title;
+  }
+
+  return 'redux-emulator';
+}
+
 export function createStore(reducer, preloadedState, middlewares) {
   if (Array.isArray(preloadedState) && typeof middlewares === 'undefined') {
     middlewares = preloadedState;
     preloadedState = reducer();
   }
 
+  const mw = [...middlewares];
+
+  if (process.env.NODE_ENV !== 'production') {
+    mw.push(useDevtools(getTitle()));
+  }
+
+  mw.push(useReducer(reducer));
+
   return compose(
     withState('state', 'dispatch', preloadedState),
-    withMiddleware('state', 'dispatch', [...middlewares, useReducer(reducer)])
+    withMiddleware('state', 'dispatch', mw)
   )(props => (
     <StoreProvider
       value={{
@@ -31,6 +47,10 @@ export function createStore(reducer, preloadedState, middlewares) {
       {props.children}
     </StoreProvider>
   ));
+}
+
+export function applyMiddleware(...middlewares) {
+  return middlewares;
 }
 
 export function Provider(props) {
@@ -65,6 +85,7 @@ export function connect(mapStateToProps, mapDispatchToProps) {
         </StoreConsumer>
       );
     }
+
     return ConnectedComponent;
   };
 }
