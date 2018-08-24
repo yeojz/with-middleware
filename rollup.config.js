@@ -20,14 +20,9 @@ function bundle(format, ext = '') {
     output: {
       banner,
       file: path.join(ROOT_DIR, 'dist', 'index' + ext + '.js'),
-      format: format,
-      name: 'recomposeWithMiddleware',
-      globals: {
-        react: 'react',
-        recompose: 'recompose'
-      }
+      format: format
     },
-    external: ['react', 'recompose'],
+    external: ['react'],
     plugins: [cleanup()]
   };
 }

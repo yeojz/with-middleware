@@ -11,7 +11,8 @@
   "license": "MIT",
   "dependencies": {
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "recompose": "^0.28.2"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.1.1",
